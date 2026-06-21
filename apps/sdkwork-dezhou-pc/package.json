@@ -1,0 +1,56 @@
+{
+  "name": "sdkwork-dezhou-pc",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "SDKWork Dezhou PC browser application composition root.",
+  "packageManager": "pnpm@10.33.0",
+  "scripts": {
+    "dev": "vite --port=3001 --host=0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "lint": "pnpm run typecheck",
+    "test:architecture": "node --test tests/dezhou-pc-architecture.contract.test.mjs"
+  },
+  "dependencies": {
+    "@sdkwork/appbase-app-sdk": "workspace:*",
+    "@sdkwork/appbase-pc-react": "workspace:*",
+    "@sdkwork/auth-pc-react": "workspace:*",
+    "@sdkwork/auth-runtime-pc-react": "workspace:*",
+    "@sdkwork/core-pc-react": "workspace:*",
+    "@sdkwork/i18n-pc-react": "workspace:*",
+    "@sdkwork/iam-contracts": "workspace:*",
+    "@sdkwork/iam-runtime": "workspace:*",
+    "@sdkwork/iam-sdk-adapter": "workspace:*",
+    "@sdkwork/runtime-bootstrap": "workspace:*",
+    "@sdkwork/sdk-common": "workspace:*",
+    "@sdkwork/ui-pc-react": "workspace:*",
+    "@sdkwork-internal/dezhou-app-sdk-generated": "workspace:*",
+    "@tailwindcss/vite": "^4.1.14",
+    "@vitejs/plugin-react": "^5.0.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router": "^7.14.0",
+    "react-router-dom": "^7.14.0",
+    "sdkwork-dezhou-pc-commons": "workspace:*",
+    "sdkwork-dezhou-pc-core": "workspace:*",
+    "sdkwork-dezhou-pc-dashboard": "workspace:*",
+    "sdkwork-dezhou-pc-i18n": "workspace:*",
+    "sdkwork-dezhou-pc-shell": "workspace:*",
+    "tailwindcss": "^4.1.14",
+    "vite": "^6.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "typescript": "~5.8.2"
+  },
+  "sdkwork": {
+    "workspace": "sdkwork-dezhou",
+    "architecture": "pc-react",
+    "domain": "game",
+    "capability": "pc-application",
+    "status": "ready"
+  }
+}

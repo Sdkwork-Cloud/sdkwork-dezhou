@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "kind": "sdkwork.route.manifest",
+  "packageName": "sdkwork-router-table-backend-api",
+  "surface": "backend-api",
+  "owner": "sdkwork-dezhou",
+  "domain": "game",
+  "capability": "table",
+  "apiAuthority": "sdkwork-dezhou-backend-api",
+  "sdkFamily": "sdkwork-dezhou-backend-sdk",
+  "prefix": "/backend/v3/api",
+  "source": {
+    "crateRoot": "crates/sdkwork-router-table-backend-api",
+    "crateImport": "sdkwork_router_table_backend_api",
+    "openapiAuthority": "apis/backend-api/game/dezhou-backend-api.openapi.json"
+  },
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/backend/v3/api/tables",
+      "operationId": "backend.dezhou.table.list",
+      "tags": ["dezhou"],
+      "requestContext": "WebRequestContext",
+      "apiSurface": "backend-api",
+      "auth": { "mode": "dual-token", "required": true, "tenantScope": "tenant", "dataScope": "organization" },
+      "handler": { "module": "crate", "name": "backend_dezhou_table_list" },
+      "schemas": { "request": null, "response": "DezhouApiResult", "problem": "ProblemDetail" },
+      "ownership": { "owner": "sdkwork-dezhou", "apiAuthority": "sdkwork-dezhou-backend-api" },
+      "source": { "file": "apis/backend-api/game/dezhou-backend-api.openapi.json" }
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+[package]
+name = "sdkwork-dezhou-table-repository-sqlx"
+version.workspace = true
+edition.workspace = true
+license = "Apache-2.0"
+description = "SQLx-backed dezhou table repository."
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]
+async-trait.workspace = true
+sdkwork_dezhou_table_service.workspace = true
+sdkwork_database_sqlx.workspace = true
+sdkwork-utils-rust.workspace = true
+sqlx.workspace = true
+
+[dev-dependencies]
+tokio.workspace = true

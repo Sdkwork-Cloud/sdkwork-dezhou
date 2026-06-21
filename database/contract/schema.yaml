@@ -1,0 +1,19 @@
+schema_version: 1
+kind: sdkwork.database.schema
+module_id: dezhou
+contract_version: 1.0.0
+owner_team: dezhou-platform
+compliance_level: L2
+engines:
+  - postgres
+table_prefix: dezhou_
+tables:
+  - name: dezhou_table
+    lifecycle_status: active
+    owner: dezhou-platform
+  - name: dezhou_seat
+    lifecycle_status: active
+    owner: dezhou-platform
+  - name: dezhou_hand
+    lifecycle_status: active
+    owner: dezhou-platform

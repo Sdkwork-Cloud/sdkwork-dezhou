@@ -1,0 +1,2 @@
+# Locale seeds: ru-RU
+

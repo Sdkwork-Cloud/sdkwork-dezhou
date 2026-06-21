@@ -1,0 +1,3 @@
+# Fixtures
+
+Static verification inputs.

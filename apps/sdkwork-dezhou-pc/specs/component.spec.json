@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "kind": "sdkwork.component.spec",
+  "component": {
+    "name": "sdkwork-dezhou-pc",
+    "displayName": "SDKWork Dezhou PC",
+    "version": "0.1.0",
+    "type": "pc-app",
+    "root": "sdkwork-dezhou/apps/sdkwork-dezhou-pc",
+    "domain": "game",
+    "capability": "pc-application",
+    "surface": "app",
+    "languages": ["typescript", "react"],
+    "generated": false,
+    "private": true,
+    "manifests": ["sdkwork.app.config.json"]
+  },
+  "canonicalSpecs": [
+    {
+      "file": "APP_PC_ARCHITECTURE_SPEC.md",
+      "path": "../../../sdkwork-specs/APP_PC_ARCHITECTURE_SPEC.md",
+      "purpose": "PC application root and package taxonomy."
+    },
+    {
+      "file": "APP_PC_REACT_UI_SPEC.md",
+      "path": "../../../sdkwork-specs/APP_PC_REACT_UI_SPEC.md",
+      "purpose": "PC React app package rules."
+    },
+    {
+      "file": "IAM_LOGIN_INTEGRATION_SPEC.md",
+      "path": "../../../sdkwork-specs/IAM_LOGIN_INTEGRATION_SPEC.md",
+      "purpose": "Appbase IAM login and TokenManager wiring."
+    }
+  ],
+  "contracts": {
+    "publicExports": ["src/bootstrap/index.ts"],
+    "runtimeEntrypoints": [
+      "sdkwork.app.config.json",
+      "package.json",
+      "index.html",
+      "vite.config.ts",
+      "tsconfig.json",
+      "src/main.tsx",
+      "src/App.tsx",
+      "src/AuthGate.tsx",
+      "src/bootstrap/environment.ts",
+      "src/bootstrap/runtime.ts",
+      "src/bootstrap/sdkClients.ts",
+      "src/bootstrap/iamRuntime.ts",
+      "src/bootstrap/routes.ts"
+    ],
+    "routeManifest": null,
+    "sdkClients": ["sdkwork-dezhou-app-sdk", "sdkwork-appbase-app-sdk"],
+    "configKeys": [
+      "sdkwork.app.config.json",
+      "config/browser/runtime-env.production.example.json"
+    ]
+  },
+  "verification": {
+    "commands": [
+      "node --test apps/sdkwork-dezhou-pc/tests/dezhou-pc-architecture.contract.test.mjs",
+      "pnpm --filter sdkwork-dezhou-pc typecheck"
+    ]
+  }
+}

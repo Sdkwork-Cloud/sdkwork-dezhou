@@ -1,0 +1,57 @@
+-- SDKWork dezhou database baseline (moduleId=dezhou, prefix=dezhou_)
+
+CREATE TABLE IF NOT EXISTS dezhou_table (
+  id TEXT PRIMARY KEY,
+  uuid TEXT NOT NULL UNIQUE,
+  tenant_id TEXT NOT NULL,
+  organization_id TEXT,
+  table_code TEXT NOT NULL,
+  title TEXT NOT NULL,
+  summary TEXT,
+  max_seats INTEGER NOT NULL DEFAULT 9,
+  current_seats INTEGER NOT NULL DEFAULT 0,
+  small_blind INTEGER NOT NULL DEFAULT 1,
+  big_blind INTEGER NOT NULL DEFAULT 2,
+  status TEXT NOT NULL DEFAULT 'open',
+  created_at TEXT NOT NULL,
+  created_by TEXT,
+  updated_at TEXT NOT NULL,
+  updated_by TEXT,
+  version INTEGER NOT NULL DEFAULT 0,
+  deleted_at TEXT,
+  deleted_by TEXT,
+  UNIQUE (tenant_id, organization_id, table_code)
+);
+
+CREATE TABLE IF NOT EXISTS dezhou_seat (
+  id TEXT PRIMARY KEY,
+  uuid TEXT NOT NULL UNIQUE,
+  tenant_id TEXT NOT NULL,
+  organization_id TEXT,
+  table_id TEXT NOT NULL,
+  seat_no INTEGER NOT NULL,
+  user_id TEXT,
+  chip_count BIGINT NOT NULL DEFAULT 0,
+  status TEXT NOT NULL DEFAULT 'empty',
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (tenant_id, table_id, seat_no)
+);
+
+CREATE TABLE IF NOT EXISTS dezhou_hand (
+  id TEXT PRIMARY KEY,
+  uuid TEXT NOT NULL UNIQUE,
+  tenant_id TEXT NOT NULL,
+  organization_id TEXT,
+  table_id TEXT NOT NULL,
+  hand_no INTEGER NOT NULL,
+  pot_amount BIGINT NOT NULL DEFAULT 0,
+  winner_user_id TEXT,
+  status TEXT NOT NULL DEFAULT 'completed',
+  recorded_at TEXT NOT NULL,
+  UNIQUE (tenant_id, table_id, hand_no)
+);
+
+CREATE INDEX IF NOT EXISTS idx_dezhou_table_tenant_status ON dezhou_table (tenant_id, status);
+CREATE INDEX IF NOT EXISTS idx_dezhou_seat_table_status ON dezhou_seat (table_id, status);
+CREATE INDEX IF NOT EXISTS idx_dezhou_hand_table_recorded ON dezhou_hand (table_id, recorded_at DESC);

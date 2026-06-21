@@ -1,0 +1,17 @@
+[package]
+name = "sdkwork-dezhou-table-service"
+version.workspace = true
+edition.workspace = true
+license = "Apache-2.0"
+description = "SDKWork dezhou table domain service."
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]
+async-trait.workspace = true
+sdkwork-utils-rust.workspace = true
+serde.workspace = true
+
+[dev-dependencies]
+tokio.workspace = true

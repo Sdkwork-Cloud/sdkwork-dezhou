@@ -1,0 +1,2 @@
+# Locale seeds: zh-CN
+

@@ -1,0 +1,22 @@
+services:
+  dezhou-api:
+    build:
+      context: ../..
+      dockerfile: deployments/docker/Dockerfile.dezhou-api
+    ports:
+      - "8096:8096"
+    environment:
+      DEZHOU_DATABASE_URL: postgres://sdkwork:sdkwork@postgres:5432/sdkwork_dezhou
+      DEZHOU_REPOSITORY_MODE: sqlx
+      SDKWORK_DEZHOU_APP_ROOT: /app
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: sdkwork
+      POSTGRES_PASSWORD: sdkwork
+      POSTGRES_DB: sdkwork_dezhou
+    ports:
+      - "5433:5432"
