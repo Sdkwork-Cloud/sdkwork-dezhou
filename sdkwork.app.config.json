@@ -8,13 +8,19 @@
     "description": "SDKWork Texas Hold'em poker platform for tables, seats, and hand history",
     "owner": "sdkwork-dezhou",
     "domain": "game",
-    "capability": "table"
+    "capability": "table",
+    "key": "sdkwork-dezhou",
+    "appType": "APP_HTML",
+    "officialWebsiteUrl": "https://sdkwork.com/apps/sdkwork-dezhou"
   },
   "runtime": {
     "apiBaseUrl": "http://localhost:8096",
     "appApiPrefix": "/app/v3/api",
     "backendApiPrefix": "/backend/v3/api",
-    "supportedDeploymentProfiles": ["standalone", "cloud"],
+    "supportedDeploymentProfiles": [
+      "standalone",
+      "cloud"
+    ],
     "defaultDeploymentProfile": "standalone"
   },
   "sdk": {
@@ -30,5 +36,15 @@
     "tables": true,
     "seats": true,
     "handHistory": true
-  }
+  },
+  "backend": {
+    "profileKey": "backend-root-admin",
+    "accessTokenPermissionScope": [
+      "iam.users.read",
+      "iam.organizations.read",
+      "iam.roles.read",
+      "iam.permissions.read"
+    ]
+  },
+  "environments": {}
 }
