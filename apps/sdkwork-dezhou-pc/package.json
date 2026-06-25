@@ -6,7 +6,7 @@
   "description": "SDKWork Dezhou PC browser application composition root.",
   "packageManager": "pnpm@10.33.0",
   "scripts": {
-    "dev": "vite --port=3001 --host=0.0.0.0",
+    "dev": "node ../../../sdkwork-iam/scripts/dev/run-pc-renderer-dev-with-bootstrap.mjs -- vite --port=3001 --host=0.0.0.0",
     "build": "vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
@@ -14,7 +14,7 @@
     "test:architecture": "node --test tests/dezhou-pc-architecture.contract.test.mjs"
   },
   "dependencies": {
-    "@sdkwork/appbase-app-sdk": "workspace:*",
+    "@sdkwork/iam-app-sdk": "workspace:*",
     "@sdkwork/appbase-pc-react": "workspace:*",
     "@sdkwork/auth-pc-react": "workspace:*",
     "@sdkwork/auth-runtime-pc-react": "workspace:*",

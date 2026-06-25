@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "kind": "sdkwork.dependency.composition",
+  "applicationCode": "dezhou",
+  "clientArchitecture": "pc",
+  "surfaces": [
+    {
+      "surface": "app",
+      "corePackage": "sdkwork-dezhou-pc-core",
+      "sdkClients": [],
+      "reusableModules": [],
+      "hostAdapters": [],
+      "dependencyApiExports": [],
+      "dependencyApiSurfaces": []
+    }
+  ],
+  "buildToolEntries": {
+    "pnpm": {
+      "workspacePackages": [
+        "sdkwork-dezhou-pc-core",
+        "sdkwork-dezhou-pc-auth",
+        "sdkwork-dezhou-pc-commons",
+        "sdkwork-dezhou-pc-dashboard",
+        "sdkwork-dezhou-pc-i18n",
+        "sdkwork-dezhou-pc-shell"
+      ]
+    }
+  }
+}

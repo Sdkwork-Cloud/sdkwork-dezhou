@@ -1,4 +1,4 @@
-import { listSdkworkDezhouPcAppSdkFamilies } from 'sdkwork-dezhou-pc-core';
+import { listSdkworkDezhouPcAppSdkFamilies } from 'sdkwork-dezhou-pc-core/composition';
 import type { SdkworkDezhouAppClient } from '@sdkwork-internal/dezhou-app-sdk-generated';
 
 import type { SdkworkDezhouPcRuntimeConfig } from './environment';

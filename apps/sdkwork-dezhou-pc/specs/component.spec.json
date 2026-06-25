@@ -10,10 +10,15 @@
     "domain": "game",
     "capability": "pc-application",
     "surface": "app",
-    "languages": ["typescript", "react"],
+    "languages": [
+      "typescript",
+      "react"
+    ],
     "generated": false,
     "private": true,
-    "manifests": ["sdkwork.app.config.json"]
+    "manifests": [
+      "sdkwork.app.config.json"
+    ]
   },
   "canonicalSpecs": [
     {
@@ -33,7 +38,9 @@
     }
   ],
   "contracts": {
-    "publicExports": ["src/bootstrap/index.ts"],
+    "publicExports": [
+      "src/bootstrap/index.ts"
+    ],
     "runtimeEntrypoints": [
       "sdkwork.app.config.json",
       "package.json",
@@ -50,11 +57,15 @@
       "src/bootstrap/routes.ts"
     ],
     "routeManifest": null,
-    "sdkClients": ["sdkwork-dezhou-app-sdk", "sdkwork-appbase-app-sdk"],
+    "sdkClients": [
+      "sdkwork-dezhou-app-sdk",
+      "sdkwork-iam-app-sdk"
+    ],
     "configKeys": [
       "sdkwork.app.config.json",
       "config/browser/runtime-env.production.example.json"
-    ]
+    ],
+    "dependencyComposition": "specs/dependency.composition.json"
   },
   "verification": {
     "commands": [
