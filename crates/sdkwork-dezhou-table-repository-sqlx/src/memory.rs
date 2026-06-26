@@ -76,7 +76,7 @@ mod tests {
         }]);
 
         let page = repo
-            .list_tables("tenant-1", &DezhouTableQuery::default())
+            .list_tables("100001", &DezhouTableQuery::default())
             .await
             .expect("page");
 
