@@ -5,9 +5,9 @@ members = [
     "crates/sdkwork-dezhou-database-host",
     "crates/sdkwork-dezhou-table-service",
     "crates/sdkwork-dezhou-table-repository-sqlx",
-    "crates/sdkwork-router-health-app-api",
-    "crates/sdkwork-router-table-app-api",
-    "crates/sdkwork-router-table-backend-api",
+    "crates/sdkwork-routes-health-app-api",
+    "crates/sdkwork-routes-table-app-api",
+    "crates/sdkwork-routes-table-backend-api",
 ]
 
 [workspace.package]
@@ -19,9 +19,9 @@ sdkwork_dezhou_api_server = { package = "sdkwork-dezhou-api-server", path = "cra
 sdkwork_dezhou_database_host = { package = "sdkwork-dezhou-database-host", path = "crates/sdkwork-dezhou-database-host" }
 sdkwork_dezhou_table_service = { package = "sdkwork-dezhou-table-service", path = "crates/sdkwork-dezhou-table-service" }
 sdkwork_dezhou_table_repository_sqlx = { package = "sdkwork-dezhou-table-repository-sqlx", path = "crates/sdkwork-dezhou-table-repository-sqlx" }
-sdkwork_router_health_app_api = { package = "sdkwork-router-health-app-api", path = "crates/sdkwork-router-health-app-api" }
-sdkwork_router_table_app_api = { package = "sdkwork-router-table-app-api", path = "crates/sdkwork-router-table-app-api" }
-sdkwork_router_table_backend_api = { package = "sdkwork-router-table-backend-api", path = "crates/sdkwork-router-table-backend-api" }
+sdkwork_routes_health_app_api = { package = "sdkwork-routes-health-app-api", path = "crates/sdkwork-routes-health-app-api" }
+sdkwork_routes_table_app_api = { package = "sdkwork-routes-table-app-api", path = "crates/sdkwork-routes-table-app-api" }
+sdkwork_routes_table_backend_api = { package = "sdkwork-routes-table-backend-api", path = "crates/sdkwork-routes-table-backend-api" }
 sdkwork-web-core = { path = "../sdkwork-web-framework/crates/sdkwork-web-core" }
 sdkwork-web-axum = { path = "../sdkwork-web-framework/crates/sdkwork-web-axum" }
 sdkwork-web-contract = { path = "../sdkwork-web-framework/crates/sdkwork-web-contract" }

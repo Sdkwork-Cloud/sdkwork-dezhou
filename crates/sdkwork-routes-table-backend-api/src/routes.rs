@@ -3,7 +3,7 @@ use axum::response::Response;
 use axum::routing::get;
 use axum::Router;
 use sdkwork_dezhou_table_service::{DezhouTableRepository, DezhouTableService};
-use sdkwork_router_table_app_api::DezhouListQuery;
+use sdkwork_routes_table_app_api::DezhouListQuery;
 use sdkwork_web_axum::RequirePrincipal;
 use std::sync::Arc;
 
@@ -26,5 +26,5 @@ async fn list_tables<R>(
 where
     R: DezhouTableRepository + Send + Sync,
 {
-    sdkwork_router_table_app_api::respond_list(store.as_ref(), principal.tenant_id(), query).await
+    sdkwork_routes_table_app_api::respond_list(store.as_ref(), principal.tenant_id(), query).await
 }

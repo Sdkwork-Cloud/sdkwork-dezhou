@@ -51,7 +51,7 @@
       "package.json#scripts.dev",
       "package.json#scripts.verify"
     ],
-    "routeManifest": "sdks/_route-manifests/app-api/sdkwork-router-table-app-api.route-manifest.json",
+    "routeManifest": "sdks/_route-manifests/app-api/sdkwork-routes-table-app-api.route-manifest.json",
     "sdkClients": ["sdkwork-dezhou-app-sdk", "sdkwork-dezhou-backend-sdk"],
     "events": [],
     "configKeys": ["DEZHOU_DATABASE_URL", "SDKWORK_DEZHOU_APP_ROOT"]

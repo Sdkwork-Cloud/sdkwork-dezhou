@@ -7,7 +7,7 @@ use sdkwork_dezhou_table_repository_sqlx::{
     DezhouTableRepositoryKind, InMemoryDezhouTableRepository,
 };
 use sdkwork_dezhou_table_service::DezhouTableService;
-use sdkwork_router_table_app_api::build_table_app_router;
+use sdkwork_routes_table_app_api::build_table_app_router;
 use std::sync::Arc;
 use tower::ServiceExt;
 

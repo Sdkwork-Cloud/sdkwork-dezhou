@@ -1,12 +1,12 @@
 [package]
-name = "sdkwork-router-table-app-api"
+name = "sdkwork-routes-table-app-api"
 version.workspace = true
 edition.workspace = true
 license = "Apache-2.0"
 description = "SDKWork dezhou table app-api router."
 
 [lib]
-name = "sdkwork_router_table_app_api"
+name = "sdkwork_routes_table_app_api"
 path = "src/lib.rs"
 
 [dependencies]

@@ -1655,9 +1655,9 @@ dependencies = [
  "sdkwork-dezhou-table-service",
  "sdkwork-iam-context-service",
  "sdkwork-iam-web-adapter",
- "sdkwork-router-health-app-api",
- "sdkwork-router-table-app-api",
- "sdkwork-router-table-backend-api",
+ "sdkwork-routes-health-app-api",
+ "sdkwork-routes-table-app-api",
+ "sdkwork-routes-table-backend-api",
  "sdkwork-web-axum",
  "sdkwork-web-contract",
  "sdkwork-web-core",
@@ -1737,7 +1737,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "sdkwork-router-health-app-api"
+name = "sdkwork-routes-health-app-api"
 version = "0.1.0"
 dependencies = [
  "axum",
@@ -1746,7 +1746,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "sdkwork-router-table-app-api"
+name = "sdkwork-routes-table-app-api"
 version = "0.1.0"
 dependencies = [
  "axum",
@@ -1757,12 +1757,12 @@ dependencies = [
 ]
 
 [[package]]
-name = "sdkwork-router-table-backend-api"
+name = "sdkwork-routes-table-backend-api"
 version = "0.1.0"
 dependencies = [
  "axum",
  "sdkwork-dezhou-table-service",
- "sdkwork-router-table-app-api",
+ "sdkwork-routes-table-app-api",
  "sdkwork-web-axum",
  "serde",
 ]
