@@ -8,3 +8,7 @@ coverage/
 *.log
 .env*
 !.env.example
+
+# SDKWork local runtime state
+.runtime/
+**/.runtime/

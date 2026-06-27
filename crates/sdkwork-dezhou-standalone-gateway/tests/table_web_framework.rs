@@ -1,6 +1,6 @@
 use axum::body::Body;
 use axum::http::{Request, StatusCode};
-use sdkwork_dezhou_api_server::{
+use sdkwork_dezhou_standalone_gateway::{
     build_router, build_table_service, with_dezhou_app_request_context,
 };
 use sdkwork_dezhou_table_repository_sqlx::{

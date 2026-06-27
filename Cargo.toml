@@ -1,7 +1,7 @@
 [workspace]
 resolver = "2"
 members = [
-    "crates/sdkwork-dezhou-api-server",
+    "crates/sdkwork-dezhou-standalone-gateway",
     "crates/sdkwork-dezhou-database-host",
     "crates/sdkwork-dezhou-table-service",
     "crates/sdkwork-dezhou-table-repository-sqlx",
@@ -15,7 +15,7 @@ edition = "2021"
 version = "0.1.0"
 
 [workspace.dependencies]
-sdkwork_dezhou_api_server = { package = "sdkwork-dezhou-api-server", path = "crates/sdkwork-dezhou-api-server" }
+sdkwork_dezhou_standalone_gateway = { package = "sdkwork-dezhou-standalone-gateway", path = "crates/sdkwork-dezhou-standalone-gateway" }
 sdkwork_dezhou_database_host = { package = "sdkwork-dezhou-database-host", path = "crates/sdkwork-dezhou-database-host" }
 sdkwork_dezhou_table_service = { package = "sdkwork-dezhou-table-service", path = "crates/sdkwork-dezhou-table-service" }
 sdkwork_dezhou_table_repository_sqlx = { package = "sdkwork-dezhou-table-repository-sqlx", path = "crates/sdkwork-dezhou-table-repository-sqlx" }

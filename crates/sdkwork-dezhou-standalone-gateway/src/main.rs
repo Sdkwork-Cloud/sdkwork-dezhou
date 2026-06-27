@@ -1,4 +1,4 @@
-use sdkwork_dezhou_api_server::{build_router, build_table_service};
+use sdkwork_dezhou_standalone_gateway::{build_router, build_table_service};
 
 #[tokio::main]
 async fn main() {
@@ -19,9 +19,9 @@ async fn main() {
     let app = build_router(table_service).await;
     let listener = tokio::net::TcpListener::bind(&bind_address)
         .await
-        .expect("bind dezhou api-server listener failed");
-    tracing::info!("sdkwork-dezhou-api-server listening on {bind_address}");
+        .expect("bind dezhou standalone-gateway listener failed");
+    tracing::info!("sdkwork-dezhou-standalone-gateway listening on {bind_address}");
     axum::serve(listener, app)
         .await
-        .expect("serve dezhou api-server failed");
+        .expect("serve dezhou standalone-gateway failed");
 }
