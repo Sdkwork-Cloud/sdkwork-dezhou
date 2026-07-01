@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "kind": "sdkwork.component.spec",
+  "component": {
+    "name": "sdkwork-dezhou-pc-core",
+    "type": "typescript-package",
+    "root": "apps/sdkwork-dezhou-pc/packages/sdkwork-dezhou-pc-core",
+    "domain": "dezhou",
+    "capability": "core",
+    "surface": "app",
+    "languages": [
+      "typescript"
+    ],
+    "generated": false
+  },
+  "contracts": {
+    "sdkDependencies": [
+      {
+        "workspace": "sdkwork-dezhou-app-sdk",
+        "surface": "app-api",
+        "credentialMode": "authenticated-app-api"
+      },
+      {
+        "workspace": "sdkwork-iam-app-sdk",
+        "surface": "app-api",
+        "credentialMode": "authenticated-app-api"
+      },
+      {
+        "workspace": "sdkwork-table-app-sdk",
+        "surface": "app-api",
+        "credentialMode": "authenticated-app-api"
+      }
+    ],
+    "dependencyApiExports": [],
+    "dependencyApiSurfaces": []
+  }
+}

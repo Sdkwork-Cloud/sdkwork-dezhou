@@ -641,7 +641,7 @@ importers:
         specifier: ~5.8.2
         version: 5.8.3
 
-  packages/common/dezhou/sdkwork-dezhou-contracts: {}
+  apps/sdkwork-dezhou-common/packages/sdkwork-dezhou-contracts: {}
 
   sdks/sdkwork-dezhou-app-sdk/sdkwork-dezhou-app-sdk-typescript/generated/server-openapi:
     dependencies:

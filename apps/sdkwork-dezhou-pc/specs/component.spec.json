@@ -64,8 +64,7 @@
     "configKeys": [
       "sdkwork.app.config.json",
       "config/browser/runtime-env.production.example.json"
-    ],
-    "dependencyComposition": "specs/dependency.composition.json"
+    ]
   },
   "verification": {
     "commands": [

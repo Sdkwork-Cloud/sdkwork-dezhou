@@ -1,4 +1,5 @@
 # SDKWork Dezhou
+repository-kind: application
 
 SDKWork Texas Hold'em poker application root. Provides table, seat, and hand-history capabilities aligned with `../sdkwork-specs`.
 
