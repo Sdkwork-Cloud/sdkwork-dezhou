@@ -5,7 +5,7 @@ import { defineConfig, loadEnv } from 'vite';
 
 const dezhouAppSdkRoot = path.resolve(
   __dirname,
-  '../../sdks/sdkwork-dezhou-app-sdk/sdkwork-dezhou-app-sdk-typescript/generated/server-openapi',
+  '../../sdks/sdkwork-dezhou-app-sdk/sdkwork-dezhou-app-sdk-typescript/src/index.ts',
 );
 
 export default defineConfig(({ mode }) => {

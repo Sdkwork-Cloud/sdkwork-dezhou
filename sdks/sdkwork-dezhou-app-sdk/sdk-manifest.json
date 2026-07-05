@@ -1,4 +1,15 @@
 {
+  "schemaVersion": 1,
+  "sdkFamily": "sdkwork-dezhou-app-sdk",
+  "sdkName": "sdkwork-dezhou-app-sdk",
+  "packageName": "@sdkwork/dezhou-app-sdk",
+  "transportPackageName": "sdkwork-dezhou-app-sdk-generated-typescript",
+  "typescript": {
+    "composedRoot": "sdkwork-dezhou-app-sdk-typescript",
+    "composedEntry": "sdkwork-dezhou-app-sdk-typescript/src/index.ts",
+    "transportRoot": "sdkwork-dezhou-app-sdk-typescript/generated/server-openapi",
+    "transportEntry": "sdkwork-dezhou-app-sdk-typescript/generated/server-openapi/src/index.ts"
+  },
   "workspace": "sdkwork-dezhou-app-sdk",
   "title": "SDKWork Dezhou App API SDK",
   "apiVersion": "0.1.0",
@@ -8,14 +19,18 @@
   "derivedSpecs": {
     "default": "../../apis/app-api/game/dezhou-app-api.openapi.json"
   },
+  "sdkOwner": "sdkwork-dezhou",
   "apiAuthority": "sdkwork-dezhou-app-api",
   "discoverySurface": {
     "sdkTarget": "app",
     "apiPrefix": "/app/v3/api",
     "schemaUrl": "/app/v3/openapi.json",
-    "generatedProtocols": ["http-openapi"],
+    "generatedProtocols": [
+      "http-openapi"
+    ],
     "manualTransports": []
   },
+  "sdkDependencies": [],
   "languages": [
     {
       "language": "typescript",
@@ -30,11 +45,9 @@
       "consumerSurface": {
         "primaryClient": "SdkworkDezhouAppClient",
         "apiPrefix": "/app/v3/api"
-      }
+      },
+      "consumerPackageName": "@sdkwork/dezhou-app-sdk",
+      "transportPackageName": "sdkwork-dezhou-app-sdk-generated-typescript"
     }
-  ],
-  "sdkOwner": "sdkwork-dezhou",
-  "sdkDependencies": [],
-  "dependencyApiExports": [],
-  "dependencyApiSurfaces": []
+  ]
 }

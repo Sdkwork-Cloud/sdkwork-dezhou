@@ -1,5 +1,5 @@
 {
-  "name": "@sdkwork-internal/dezhou-app-sdk-generated",
+  "name": "sdkwork-dezhou-app-sdk-generated-typescript",
   "version": "0.1.0",
   "private": true,
   "description": "Generator-owned TypeScript transport SDK for sdkwork-dezhou-app-sdk.",
@@ -37,5 +37,6 @@
     "api",
     "app",
     "sdkwork"
-  ]
+  ],
+  "sdkworkRole": "transport"
 }

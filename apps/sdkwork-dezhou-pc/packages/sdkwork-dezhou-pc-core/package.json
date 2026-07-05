@@ -40,9 +40,9 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@sdkwork-internal/dezhou-app-sdk-generated": "workspace:*",
     "@sdkwork/sdk-common": "workspace:*",
-    "zustand": "^5.0.11"
+    "zustand": "^5.0.11",
+    "@sdkwork/dezhou-app-sdk": "workspace:*"
   },
   "devDependencies": {
     "@types/react": "^19.0.10",

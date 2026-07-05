@@ -19,7 +19,7 @@
     "api:check": "node tools/dezhou_route_manifest_check.mjs && node tools/dezhou_sdk_generate.mjs --check",
     "sdk:check": "node tools/dezhou_sdk_generate.mjs --check",
     "sdk:generate": "node tools/dezhou_sdk_generate.mjs",
-    "sdk:build": "pnpm --filter @sdkwork-internal/dezhou-app-sdk-generated build && pnpm --filter @sdkwork-internal/dezhou-backend-sdk-generated build",
+    "sdk:build": "pnpm --filter @sdkwork/dezhou-app-sdk build && pnpm --filter @sdkwork/dezhou-backend-sdk build",
     "check:agent-workflow-standard": "node ../sdkwork-specs/tools/check-agent-workflow-standard.mjs --root .",
     "db:materialize:contract": "node ../sdkwork-specs/tools/materialize-database-contract-from-baseline.mjs --root . --baseline database/ddl/baseline/postgres/0001_dezhou_baseline.sql --module-id dezhou --owner dezhou-platform --prefixes dezhou_ --engines postgres",
     "db:validate": "node ../sdkwork-specs/tools/check-database-framework-standard.mjs --root .",
@@ -44,5 +44,12 @@
     "@sdkwork/utils": "workspace:*",
     "@types/node": "^25.5.2",
     "typescript": "^6.0.2"
+  },
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "import": "./src/index.ts",
+      "default": "./src/index.ts"
+    }
   }
 }
