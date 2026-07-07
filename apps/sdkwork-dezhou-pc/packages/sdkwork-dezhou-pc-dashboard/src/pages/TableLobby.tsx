@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getDezhouTableService, useDezhouUserStore } from 'sdkwork-dezhou-pc-core';
+import type { DezhouTableItem } from 'sdkwork-dezhou-pc-core';
 import { dezhouMessages } from 'sdkwork-dezhou-pc-i18n';
-import type { DezhouTableItem } from '@sdkwork-internal/dezhou-app-sdk-generated';
 export function TableLobby() {
   const messages = dezhouMessages['zh-CN'];
   const displayName = useDezhouUserStore((s) => s.displayName);

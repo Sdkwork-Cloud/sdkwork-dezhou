@@ -1,6 +1,8 @@
 import type { DezhouTableItem } from '@sdkwork-internal/dezhou-app-sdk-generated';
 import type { SdkworkDezhouAppClient } from '@sdkwork-internal/dezhou-app-sdk-generated';
 
+export type { DezhouTableItem };
+
 export interface DezhouTableListParams {
   page?: number;
   pageSize?: number;
