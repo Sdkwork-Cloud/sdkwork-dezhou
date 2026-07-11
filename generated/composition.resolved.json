@@ -26,29 +26,239 @@
       "forbidProductSameOriginFallback": false,
       "corePackage": "sdkwork-dezhou-pc-core",
       "source": "apps/sdkwork-dezhou-pc/packages/sdkwork-dezhou-pc-core/specs/component.spec.json"
-    },
-    {
-      "workspace": "sdkwork-table-app-sdk",
-      "surface": "app-api",
-      "apiPrefix": "/app/v3/api",
-      "connectivityPlane": "application",
-      "runtimeMode": "same-origin-embedded",
-      "mountStatus": null,
-      "envKey": "VITE_SDKWORK_TABLE_APP_API_BASE_URL",
-      "forbidProductSameOriginFallback": false,
-      "corePackage": "sdkwork-dezhou-pc-core",
-      "source": "apps/sdkwork-dezhou-pc/packages/sdkwork-dezhou-pc-core/specs/component.spec.json"
     }
   ],
   "permissions": {
     "inheritanceMode": "module-catalog-with-overrides",
     "inheritedManifests": [
       {
+        "workspace": "sdkwork-dezhou-app-sdk",
+        "manifestRef": "specs/iam.module.manifest.json",
+        "inheritPermissions": true
+      },
+      {
         "workspace": "sdkwork-iam-app-sdk",
         "manifestRef": "../sdkwork-iam/iam/modules/iam-kernel/iam.module.manifest.json",
         "inheritPermissions": true
       }
     ]
+  },
+  "architecture": {
+    "components": [
+      {
+        "name": "sdkwork-dezhou-pc-core",
+        "type": "typescript-package",
+        "root": "apps/sdkwork-dezhou-pc/packages/sdkwork-dezhou-pc-core",
+        "domain": "dezhou",
+        "capability": "core",
+        "surface": "app",
+        "languages": [
+          "typescript"
+        ],
+        "source": "apps/sdkwork-dezhou-pc/packages/sdkwork-dezhou-pc-core/specs/component.spec.json",
+        "layerRole": null,
+        "publicExports": [],
+        "providedPorts": [],
+        "requiredPorts": [],
+        "sdkDependencies": [
+          {
+            "workspace": "sdkwork-dezhou-app-sdk",
+            "surface": "app-api",
+            "credentialMode": "authenticated-app-api"
+          },
+          {
+            "workspace": "sdkwork-iam-app-sdk",
+            "surface": "app-api",
+            "credentialMode": "authenticated-app-api"
+          }
+        ],
+        "routeManifest": null,
+        "runtimeEntrypoints": [],
+        "dependencyApiSurfaces": []
+      },
+      {
+        "name": "sdkwork-dezhou-pc",
+        "type": "pc-app",
+        "root": "sdkwork-dezhou/apps/sdkwork-dezhou-pc",
+        "domain": "game",
+        "capability": "pc-application",
+        "surface": "app",
+        "languages": [
+          "typescript",
+          "react"
+        ],
+        "source": "apps/sdkwork-dezhou-pc/specs/component.spec.json",
+        "layerRole": null,
+        "publicExports": [
+          "src/bootstrap/index.ts"
+        ],
+        "providedPorts": [],
+        "requiredPorts": [],
+        "sdkDependencies": [],
+        "routeManifest": null,
+        "runtimeEntrypoints": [
+          "sdkwork.app.config.json",
+          "package.json",
+          "index.html",
+          "vite.config.ts",
+          "tsconfig.json",
+          "src/main.tsx",
+          "src/App.tsx",
+          "src/AuthGate.tsx",
+          "src/bootstrap/environment.ts",
+          "src/bootstrap/runtime.ts",
+          "src/bootstrap/sdkClients.ts",
+          "src/bootstrap/iamRuntime.ts",
+          "src/bootstrap/routes.ts"
+        ],
+        "dependencyApiSurfaces": []
+      },
+      {
+        "name": "sdkwork-dezhou-workspace",
+        "type": "rust-crate",
+        "root": "sdkwork-dezhou",
+        "domain": "game",
+        "capability": "workspace",
+        "surface": null,
+        "languages": [
+          "typescript",
+          "rust"
+        ],
+        "source": "specs/component.spec.json",
+        "layerRole": null,
+        "publicExports": [
+          "."
+        ],
+        "providedPorts": [],
+        "requiredPorts": [],
+        "sdkDependencies": [],
+        "routeManifest": "sdks/_route-manifests/app-api/sdkwork-routes-table-app-api.route-manifest.json",
+        "runtimeEntrypoints": [
+          "package.json#scripts.dev",
+          "package.json#scripts.verify"
+        ],
+        "dependencyApiSurfaces": []
+      }
+    ],
+    "frontend": {
+      "packages": [
+        {
+          "appRoot": "apps/sdkwork-dezhou-pc",
+          "architecture": "pc",
+          "directoryName": "sdkwork-dezhou-pc-auth",
+          "name": "sdkwork-dezhou-pc-auth",
+          "role": "capability"
+        },
+        {
+          "appRoot": "apps/sdkwork-dezhou-pc",
+          "architecture": "pc",
+          "directoryName": "sdkwork-dezhou-pc-commons",
+          "name": "sdkwork-dezhou-pc-commons",
+          "role": "commons"
+        },
+        {
+          "appRoot": "apps/sdkwork-dezhou-pc",
+          "architecture": "pc",
+          "directoryName": "sdkwork-dezhou-pc-core",
+          "name": "sdkwork-dezhou-pc-core",
+          "role": "core"
+        },
+        {
+          "appRoot": "apps/sdkwork-dezhou-pc",
+          "architecture": "pc",
+          "directoryName": "sdkwork-dezhou-pc-dashboard",
+          "name": "sdkwork-dezhou-pc-dashboard",
+          "role": "capability"
+        },
+        {
+          "appRoot": "apps/sdkwork-dezhou-pc",
+          "architecture": "pc",
+          "directoryName": "sdkwork-dezhou-pc-i18n",
+          "name": "sdkwork-dezhou-pc-i18n",
+          "role": "capability"
+        },
+        {
+          "appRoot": "apps/sdkwork-dezhou-pc",
+          "architecture": "pc",
+          "directoryName": "sdkwork-dezhou-pc-shell",
+          "name": "sdkwork-dezhou-pc-shell",
+          "role": "shell"
+        }
+      ]
+    },
+    "rust": {
+      "crates": [
+        {
+          "packageName": "sdkwork-dezhou-database-host",
+          "manifest": "crates/sdkwork-dezhou-database-host/Cargo.toml",
+          "dependencies": []
+        },
+        {
+          "packageName": "sdkwork-dezhou-standalone-gateway",
+          "manifest": "crates/sdkwork-dezhou-standalone-gateway/Cargo.toml",
+          "dependencies": [
+            "serde",
+            "serde-json",
+            "name",
+            "path",
+            "http-body-util",
+            "tower"
+          ]
+        },
+        {
+          "packageName": "sdkwork-dezhou-table-repository-sqlx",
+          "manifest": "crates/sdkwork-dezhou-table-repository-sqlx/Cargo.toml",
+          "dependencies": []
+        },
+        {
+          "packageName": "sdkwork-dezhou-table-service",
+          "manifest": "crates/sdkwork-dezhou-table-service/Cargo.toml",
+          "dependencies": []
+        },
+        {
+          "packageName": "sdkwork-routes-health-app-api",
+          "manifest": "crates/sdkwork-routes-health-app-api/Cargo.toml",
+          "dependencies": []
+        },
+        {
+          "packageName": "sdkwork-routes-table-app-api",
+          "manifest": "crates/sdkwork-routes-table-app-api/Cargo.toml",
+          "dependencies": []
+        },
+        {
+          "packageName": "sdkwork-routes-table-backend-api",
+          "manifest": "crates/sdkwork-routes-table-backend-api/Cargo.toml",
+          "dependencies": [
+            "sdkwork-routes-table-app-api"
+          ]
+        }
+      ]
+    },
+    "routes": {
+      "manifests": [
+        {
+          "source": "sdks/_route-manifests/app-api/sdkwork-router-health-app-api.route-manifest.json",
+          "packageName": "sdkwork-routes-health-app-api",
+          "surface": "app-api",
+          "routeCount": 2
+        },
+        {
+          "source": "sdks/_route-manifests/app-api/sdkwork-router-table-app-api.route-manifest.json",
+          "packageName": "sdkwork-routes-table-app-api",
+          "surface": "app-api",
+          "routeCount": 2
+        },
+        {
+          "source": "sdks/_route-manifests/backend-api/sdkwork-router-table-backend-api.route-manifest.json",
+          "packageName": "sdkwork-routes-table-backend-api",
+          "surface": "backend-api",
+          "routeCount": 1
+        }
+      ]
+    },
+    "runtime": {
+      "dependencyApiSurfaces": []
+    }
   },
   "env": {},
   "requiresPlatformGatewayProcess": true,
@@ -57,8 +267,7 @@
     "resolver": "sdkwork-specs/tools/lib/composition-resolver.mjs",
     "credentialModes": {
       "sdkwork-dezhou-app-sdk": "authenticated-app-api",
-      "sdkwork-iam-app-sdk": "authenticated-app-api",
-      "sdkwork-table-app-sdk": "authenticated-app-api"
+      "sdkwork-iam-app-sdk": "authenticated-app-api"
     }
   }
 }
