@@ -31,6 +31,7 @@ sdkwork_routes_table_app_api.workspace = true
 sdkwork_routes_table_backend_api.workspace = true
 sdkwork-web-core.workspace = true
 sdkwork-web-axum.workspace = true
+sdkwork-web-bootstrap.workspace = true
 sdkwork-web-contract.workspace = true
 sdkwork-iam-web-adapter.workspace = true
 sdkwork_iam_context_service.workspace = true
@@ -44,4 +45,3 @@ http-body-util = "0.1"
 sdkwork_dezhou_table_repository_sqlx.workspace = true
 tokio.workspace = true
 tower = { version = "0.5", features = ["util"] }
-

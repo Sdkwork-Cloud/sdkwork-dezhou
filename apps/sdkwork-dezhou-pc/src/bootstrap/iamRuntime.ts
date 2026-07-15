@@ -12,6 +12,7 @@ import { createClient as createDezhouAppClient } from '@sdkwork-internal/dezhou-
 import type { SdkworkDezhouPcRuntimeConfig } from './environment';
 import {
   createSdkworkDezhouPcSessionStore,
+  SDKWORK_DEZHOU_PC_SESSION_STORAGE_KEY,
   type SdkworkDezhouPcSessionSnapshot,
   type SdkworkDezhouPcSessionStore,
 } from './sessionStore';
@@ -193,7 +194,18 @@ function resolveSessionStorage(): Storage | undefined {
   if (typeof window === 'undefined') {
     return undefined;
   }
-  return window.sessionStorage;
+  migrateLegacySessionStorage(SDKWORK_DEZHOU_PC_SESSION_STORAGE_KEY);
+  return window.localStorage;
+}
+
+function migrateLegacySessionStorage(storageKey: string): void {
+  const legacySession = window.sessionStorage.getItem(storageKey);
+  if (legacySession && !window.localStorage.getItem(storageKey)) {
+    window.localStorage.setItem(storageKey, legacySession);
+  }
+  if (legacySession) {
+    window.sessionStorage.removeItem(storageKey);
+  }
 }
 
 function toIamDeploymentMode(value: SdkworkDezhouPcRuntimeConfig['deploymentMode']): IamDeploymentMode {
