@@ -65,7 +65,7 @@ function validateSdkFamily(surface, config) {
     console.error(`[dezhou-sdk] missing SDK family directory: sdks/${config.sdkFamily}`);
     return false;
   }
-  const assemblyPath = resolve(sdkFamilyDir, '.sdkwork-assembly.json');
+  const assemblyPath = resolve(sdkFamilyDir, 'sdk-manifest.json');
   if (!existsSync(assemblyPath)) {
     console.error(`[dezhou-sdk] missing assembly manifest for ${config.sdkFamily}`);
     return false;

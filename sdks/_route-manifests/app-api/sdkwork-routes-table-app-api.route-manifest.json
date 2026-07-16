@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "kind": "sdkwork.route.manifest",
+  "packageName": "sdkwork-routes-table-app-api",
+  "surface": "app-api",
+  "owner": "sdkwork-dezhou",
+  "domain": "game",
+  "capability": "table",
+  "apiAuthority": "sdkwork-dezhou-app-api",
+  "sdkFamily": "sdkwork-dezhou-app-sdk",
+  "prefix": "/app/v3/api",
+  "source": {
+    "crateRoot": "crates/sdkwork-routes-table-app-api",
+    "crateImport": "sdkwork_routes_table_app_api",
+    "openapiAuthority": "apis/app-api/game/dezhou-app-api.openapi.json"
+  },
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/app/v3/api/tables",
+      "operationId": "dezhou.table.list",
+      "tags": ["dezhou"],
+      "requestContext": "WebRequestContext",
+      "apiSurface": "app-api",
+      "auth": { "mode": "dual-token", "required": true, "tenantScope": "tenant", "dataScope": "organization" },
+      "handler": { "module": "crate", "name": "dezhou_table_list" },
+      "schemas": { "request": null, "response": "DezhouApiResult", "problem": "ProblemDetail" },
+      "ownership": { "owner": "sdkwork-dezhou", "apiAuthority": "sdkwork-dezhou-app-api" },
+      "source": { "file": "apis/app-api/game/dezhou-app-api.openapi.json" }
+    },
+    {
+      "method": "GET",
+      "path": "/app/v3/api/tables/{tableId}",
+      "operationId": "dezhou.table.retrieve",
+      "tags": ["dezhou"],
+      "requestContext": "WebRequestContext",
+      "apiSurface": "app-api",
+      "auth": { "mode": "dual-token", "required": true, "tenantScope": "tenant", "dataScope": "organization" },
+      "handler": { "module": "crate", "name": "dezhou_table_retrieve" },
+      "schemas": { "request": null, "response": "DezhouApiResult", "problem": "ProblemDetail" },
+      "ownership": { "owner": "sdkwork-dezhou", "apiAuthority": "sdkwork-dezhou-app-api" },
+      "source": { "file": "apis/app-api/game/dezhou-app-api.openapi.json" }
+    }
+  ]
+}

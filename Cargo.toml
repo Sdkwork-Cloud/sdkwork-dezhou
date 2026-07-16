@@ -1,6 +1,7 @@
 [workspace]
 resolver = "2"
 members = [
+    "crates/sdkwork-dezhou-gateway-assembly",
     "crates/sdkwork-dezhou-standalone-gateway",
     "crates/sdkwork-dezhou-database-host",
     "crates/sdkwork-dezhou-table-service",

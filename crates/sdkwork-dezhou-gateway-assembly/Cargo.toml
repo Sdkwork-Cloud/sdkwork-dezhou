@@ -1,0 +1,16 @@
+[package]
+name = "sdkwork-dezhou-gateway-assembly"
+edition.workspace = true
+version.workspace = true
+description = "Generated gateway assembly for sdkwork-dezhou application HTTP plane."
+
+[lib]
+name = "sdkwork_dezhou_gateway_assembly"
+path = "src/lib.rs"
+
+[dependencies]
+axum.workspace = true
+tokio.workspace = true
+sdkwork-dezhou-standalone-gateway = { path = "../sdkwork-dezhou-standalone-gateway" }
+sdkwork-routes-table-app-api = { path = "../sdkwork-routes-table-app-api" }
+sdkwork-routes-table-backend-api = { path = "../sdkwork-routes-table-backend-api" }
