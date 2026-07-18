@@ -1,0 +1,11 @@
+[package]
+name = "sdkwork-dezhou-service-host"
+edition.workspace = true
+version.workspace = true
+license = "Apache-2.0"
+description = "In-process Dezhou table service container for gateway assembly."
+
+[dependencies]
+sdkwork_dezhou_database_host.workspace = true
+sdkwork_dezhou_table_repository_sqlx.workspace = true
+sdkwork_dezhou_table_service.workspace = true

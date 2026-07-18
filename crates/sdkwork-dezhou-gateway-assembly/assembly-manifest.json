@@ -4,7 +4,7 @@
   "applicationCode": "dezhou",
   "packageName": "sdkwork-dezhou-gateway-assembly",
   "crateDir": "crates/sdkwork-dezhou-gateway-assembly",
-  "generatedAt": "2026-07-16T04:44:50.976Z",
+  "generatedAt": "2026-07-16T17:08:28.681Z",
   "routeCrates": [
     {
       "packageName": "sdkwork-routes-table-app-api",

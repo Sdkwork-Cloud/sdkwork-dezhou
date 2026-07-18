@@ -8,13 +8,21 @@ use sdkwork_dezhou_table_repository_sqlx::{
 };
 use sdkwork_dezhou_table_service::DezhouTableService;
 use sdkwork_routes_table_app_api::build_table_app_router;
+use sdkwork_web_core::{access_token_jwt, auth_token_jwt};
 use std::sync::Arc;
 use tower::ServiceExt;
 
-const DEV_AUTH_TOKEN: &str =
-    "Bearer tenant_id=demo-tenant;user_id=user-1;session_id=session-1;app_id=dezhou;auth_level=password";
-const DEV_ACCESS_TOKEN: &str =
-    "tenant_id=demo-tenant;user_id=user-1;session_id=session-1;app_id=dezhou;environment=dev;deployment_mode=saas";
+static DEV_AUTH_ENV_LOCK: std::sync::Mutex<()> = std::sync::Mutex::new(());
+
+fn dev_tokens() -> (String, String) {
+    (
+        format!(
+            "Bearer {}",
+            auth_token_jwt("100001", "user-1", "session-1", "dezhou")
+        ),
+        access_token_jwt("100001", "user-1", "session-1", "dezhou"),
+    )
+}
 
 type SharedTableService = Arc<DezhouTableService<DezhouTableRepositoryKind>>;
 
@@ -43,19 +51,25 @@ async fn table_router_rejects_unauthenticated_requests() {
 
 #[tokio::test]
 async fn table_router_accepts_dev_inline_dual_tokens() {
+    let _env_guard = DEV_AUTH_ENV_LOCK
+        .lock()
+        .unwrap_or_else(|poisoned| poisoned.into_inner());
+    std::env::set_var("SDKWORK_IAM_ALLOW_DEV_AUTH_FALLBACK", "true");
+    let (auth_token, access_token) = dev_tokens();
     let router = with_dezhou_app_request_context(build_table_app_router(memory_table_service()));
 
     let response = router
         .oneshot(
             Request::builder()
                 .uri("/app/v3/api/tables")
-                .header("Authorization", DEV_AUTH_TOKEN)
-                .header("Access-Token", DEV_ACCESS_TOKEN)
+                .header("Authorization", auth_token)
+                .header("Access-Token", access_token)
                 .body(Body::empty())
                 .unwrap(),
         )
         .await
         .unwrap();
+    std::env::remove_var("SDKWORK_IAM_ALLOW_DEV_AUTH_FALLBACK");
 
     assert_eq!(response.status(), StatusCode::OK);
 }

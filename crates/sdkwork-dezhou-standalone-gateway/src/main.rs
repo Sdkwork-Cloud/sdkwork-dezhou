@@ -1,4 +1,5 @@
-use sdkwork_dezhou_standalone_gateway::{build_router, build_table_service};
+use sdkwork_dezhou_gateway_assembly::assemble_application_router;
+use sdkwork_dezhou_standalone_gateway::build_router_from_business;
 
 #[tokio::main]
 async fn main() {
@@ -13,10 +14,10 @@ async fn main() {
         .or_else(|_| std::env::var("SDKWORK_DEZHOU_APPLICATION_PUBLIC_INGRESS_BIND"))
         .unwrap_or_else(|_| "127.0.0.1:8096".to_owned());
 
-    let table_service = build_table_service()
+    let assembly = assemble_application_router()
         .await
-        .expect("dezhou table service bootstrap failed");
-    let app = build_router(table_service).await;
+        .expect("dezhou gateway assembly failed");
+    let app = build_router_from_business(assembly.router);
     let listener = tokio::net::TcpListener::bind(&bind_address)
         .await
         .expect("bind dezhou standalone-gateway listener failed");
