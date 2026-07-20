@@ -1,0 +1,32 @@
+{
+  "kind": "sdkwork.api.assembly",
+  "schemaVersion": 1,
+  "applicationCode": "dezhou",
+  "apiMode": "served",
+  "packageName": "sdkwork-api-dezhou-assembly",
+  "crateDir": "crates/sdkwork-api-dezhou-assembly",
+  "routeCrates": [
+    {
+      "packageName": "sdkwork-routes-table-app-api",
+      "memberDir": "crates/sdkwork-routes-table-app-api",
+      "libName": "sdkwork_routes_table_app_api",
+      "surface": "app-api",
+      "pathPrefix": null,
+      "mountOrder": 0,
+      "componentRef": "crates/sdkwork-routes-table-app-api/specs/component.spec.json",
+      "routeManifestRef": "crates/sdkwork-routes-table-app-api/sdks/_route-manifests/app-api/sdkwork-routes-table-app-api.route-manifest.json",
+      "sourceRef": "crates/sdkwork-routes-table-app-api/Cargo.toml"
+    },
+    {
+      "packageName": "sdkwork-routes-table-backend-api",
+      "memberDir": "crates/sdkwork-routes-table-backend-api",
+      "libName": "sdkwork_routes_table_backend_api",
+      "surface": "backend-api",
+      "pathPrefix": null,
+      "mountOrder": 1,
+      "componentRef": "crates/sdkwork-routes-table-backend-api/specs/component.spec.json",
+      "routeManifestRef": "crates/sdkwork-routes-table-backend-api/sdks/_route-manifests/backend-api/sdkwork-routes-table-backend-api.route-manifest.json",
+      "sourceRef": "crates/sdkwork-routes-table-backend-api/Cargo.toml"
+    }
+  ]
+}
