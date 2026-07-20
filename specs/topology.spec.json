@@ -72,8 +72,8 @@
   },
   "components": {
     "applicationServer": {
-      "crate": "sdkwork-dezhou-standalone-gateway",
-      "binary": "sdkwork-dezhou-standalone-gateway"
+      "crate": "sdkwork-api-dezhou-standalone-gateway",
+      "binary": "sdkwork-api-dezhou-standalone-gateway"
     }
   },
   "orchestration": {
@@ -82,8 +82,8 @@
         "processes": [
           {
             "id": "application.public-ingress",
-            "crate": "sdkwork-dezhou-standalone-gateway",
-            "binary": "sdkwork-dezhou-standalone-gateway",
+            "crate": "sdkwork-api-dezhou-standalone-gateway",
+            "binary": "sdkwork-api-dezhou-standalone-gateway",
             "required": true,
             "role": "api-standalone-gateway"
           }
@@ -103,8 +103,8 @@
         "processes": [
           {
             "id": "application.public-ingress",
-            "crate": "sdkwork-dezhou-standalone-gateway",
-            "binary": "sdkwork-dezhou-standalone-gateway",
+            "crate": "sdkwork-api-dezhou-standalone-gateway",
+            "binary": "sdkwork-api-dezhou-standalone-gateway",
             "required": true,
             "role": "api-standalone-gateway"
           }
@@ -118,8 +118,8 @@
         "processes": [
           {
             "id": "application.public-ingress",
-            "crate": "sdkwork-dezhou-standalone-gateway",
-            "binary": "sdkwork-dezhou-standalone-gateway",
+            "crate": "sdkwork-api-dezhou-standalone-gateway",
+            "binary": "sdkwork-api-dezhou-standalone-gateway",
             "required": true,
             "role": "api-standalone-gateway"
           }

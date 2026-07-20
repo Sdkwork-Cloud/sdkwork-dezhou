@@ -4,7 +4,7 @@ Profiles: `standalone`, `cloud`.
 
 | Artifact | Purpose |
 | --- | --- |
-| `docker/Dockerfile.dezhou-api` | Container image for `sdkwork-dezhou-standalone-gateway` |
+| `docker/Dockerfile.dezhou-api` | Container image for `sdkwork-api-dezhou-standalone-gateway` |
 | `templates/docker-compose.cloud.example.yml` | Local cloud profile with PostgreSQL |
 | `templates/server.env.example` | Server runtime env template |
 

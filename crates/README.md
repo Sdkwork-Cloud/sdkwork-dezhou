@@ -4,7 +4,7 @@ Rust workspace members:
 
 | Crate | Responsibility |
 | --- | --- |
-| `sdkwork-dezhou-standalone-gateway` | HTTP bootstrap and router composition with `sdkwork-web-framework` |
+| `sdkwork-api-dezhou-standalone-gateway` | HTTP bootstrap and router composition with `sdkwork-web-framework` |
 | `sdkwork-dezhou-database-host` | `sdkwork-database` lifecycle bootstrap |
 | `sdkwork-dezhou-table-service` | Texas Hold'em table domain service |
 | `sdkwork-dezhou-table-repository-sqlx` | Table persistence adapter (memory and SQLx) |
