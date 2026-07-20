@@ -25,7 +25,3 @@ pub fn assemble_api_router_with_service(
         router: Router::new().merge(app).merge(backend),
     }
 }
-
-pub async fn assemble_business_routes() -> Result<ApiAssembly, String> {
-    assemble_api_router().await
-}
