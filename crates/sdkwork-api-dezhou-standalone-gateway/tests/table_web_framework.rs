@@ -69,18 +69,63 @@ async fn table_router_accepts_dev_inline_dual_tokens() {
         )
         .await
         .unwrap();
-    std::env::remove_var("SDKWORK_IAM_ALLOW_DEV_AUTH_FALLBACK");
-
     assert_eq!(response.status(), StatusCode::OK);
+    let body = axum::body::to_bytes(response.into_body(), usize::MAX)
+        .await
+        .unwrap();
+    let payload: serde_json::Value = serde_json::from_slice(&body).unwrap();
+    assert_eq!(Some(0), payload["code"].as_i64());
+    assert!(payload["traceId"].as_str().is_some());
+    assert!(payload["data"]["items"].is_array());
+    assert_eq!(Some("offset"), payload["data"]["pageInfo"]["mode"].as_str());
+    std::env::remove_var("SDKWORK_IAM_ALLOW_DEV_AUTH_FALLBACK");
 }
 
 #[tokio::test]
-async fn build_router_merges_health_and_table_routes() {
+async fn table_router_rejects_invalid_pagination_with_problem_detail() {
+    let _env_guard = DEV_AUTH_ENV_LOCK
+        .lock()
+        .unwrap_or_else(|poisoned| poisoned.into_inner());
+    std::env::set_var("SDKWORK_IAM_ALLOW_DEV_AUTH_FALLBACK", "true");
+    let (auth_token, access_token) = dev_tokens();
+    let router = with_dezhou_app_request_context(build_table_app_router(memory_table_service()));
+
+    let response = router
+        .oneshot(
+            Request::builder()
+                .uri("/app/v3/api/tables?page_size=201")
+                .header("Authorization", auth_token)
+                .header("Access-Token", access_token)
+                .body(Body::empty())
+                .unwrap(),
+        )
+        .await
+        .unwrap();
+
+    assert_eq!(response.status(), StatusCode::BAD_REQUEST);
+    assert_eq!(
+        Some("application/problem+json"),
+        response
+            .headers()
+            .get("content-type")
+            .and_then(|value| value.to_str().ok())
+    );
+    let body = axum::body::to_bytes(response.into_body(), usize::MAX)
+        .await
+        .unwrap();
+    let payload: serde_json::Value = serde_json::from_slice(&body).unwrap();
+    assert_eq!(Some(40_003), payload["code"].as_i64());
+    assert!(payload["traceId"].as_str().is_some());
+    std::env::remove_var("SDKWORK_IAM_ALLOW_DEV_AUTH_FALLBACK");
+}
+
+#[tokio::test]
+async fn build_router_mounts_infrastructure_and_table_routes() {
     let app = build_router(memory_table_service()).await;
     let response = app
         .oneshot(
             Request::builder()
-                .uri("/app/v3/api/system/health")
+                .uri("/healthz")
                 .body(Body::empty())
                 .unwrap(),
         )
@@ -94,4 +139,5 @@ async fn memory_repository_mode_builds_table_service() {
     std::env::set_var("DEZHOU_REPOSITORY_MODE", "memory");
     let service = build_table_service().await.expect("table service");
     assert!(Arc::strong_count(&service) >= 1);
+    std::env::remove_var("DEZHOU_REPOSITORY_MODE");
 }

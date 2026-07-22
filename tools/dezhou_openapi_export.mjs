@@ -65,32 +65,25 @@ const sharedComponents = {
     ProblemDetail: {
       type: 'object',
       additionalProperties: true,
-      required: ['type', 'title', 'status'],
+      required: ['type', 'title', 'status', 'code', 'traceId'],
       properties: {
         type: { type: 'string', format: 'uri' },
         title: { type: 'string' },
         status: { type: 'integer' },
         detail: { type: 'string' },
         instance: { type: 'string' },
+        code: { type: 'integer', format: 'int32', minimum: 40001, maximum: 79999 },
+        traceId: { type: 'string' },
       },
     },
-    DezhouApiResult: {
+    SdkWorkApiResponse: {
       type: 'object',
       additionalProperties: false,
-      required: ['code', 'message', 'data'],
+      required: ['code', 'data', 'traceId'],
       properties: {
-        code: { type: 'string' },
-        message: { type: 'string' },
+        code: { type: 'integer', format: 'int32', enum: [0], default: 0 },
         data: {},
-      },
-    },
-    DezhouHealthResponse: {
-      type: 'object',
-      additionalProperties: false,
-      required: ['status', 'service'],
-      properties: {
-        status: { type: 'string' },
-        service: { type: 'string' },
+        traceId: { type: 'string' },
       },
     },
     DezhouTableItem: {
@@ -107,27 +100,50 @@ const sharedComponents = {
         status: { type: 'string' },
       },
     },
-    DezhouTablePage: {
+    PageInfo: {
       type: 'object',
       additionalProperties: false,
-      required: ['items', 'total', 'page', 'pageSize'],
+      required: ['mode', 'page', 'pageSize', 'totalItems', 'totalPages'],
       properties: {
-        items: {
-          type: 'array',
-          items: { $ref: '#/components/schemas/DezhouTableItem' },
-        },
-        total: { type: 'integer', minimum: 0 },
+        mode: { type: 'string', enum: ['offset'] },
         page: { type: 'integer', minimum: 1 },
         pageSize: { type: 'integer', minimum: 1 },
+        totalItems: { type: 'string', pattern: '^[0-9]+$' },
+        totalPages: { type: 'integer', minimum: 0 },
+        hasMore: { type: 'boolean' },
       },
     },
+    DezhouTableResponse: responseSchema({
+      type: 'object',
+      additionalProperties: false,
+      required: ['item'],
+      properties: { item: { $ref: '#/components/schemas/DezhouTableItem' } },
+    }),
+    DezhouTableListResponse: responseSchema({
+      type: 'object',
+      additionalProperties: false,
+      required: ['items', 'pageInfo'],
+      properties: {
+        items: { type: 'array', items: { $ref: '#/components/schemas/DezhouTableItem' } },
+        pageInfo: { $ref: '#/components/schemas/PageInfo' },
+      },
+    }),
   },
 };
 
 const dualTokenSecurity = [{ AuthToken: [], AccessToken: [] }];
 
+function responseSchema(dataSchema) {
+  return {
+    allOf: [
+      { $ref: '#/components/schemas/SdkWorkApiResponse' },
+      { type: 'object', required: ['data'], properties: { data: dataSchema } },
+    ],
+  };
+}
+
 function operation(operationId, tags, apiSurface, options = {}) {
-  const { publicRoute = false, parameters = [], responseSchema = 'DezhouApiResult' } = options;
+  const { parameters = [], responseSchema: successSchema = 'DezhouTableListResponse' } = options;
   return {
     operationId,
     tags,
@@ -135,14 +151,14 @@ function operation(operationId, tags, apiSurface, options = {}) {
     'x-sdkwork-api-surface': apiSurface,
     'x-sdkwork-owner': OWNER,
     'x-sdkwork-domain': DOMAIN,
-    ...(publicRoute ? { security: [] } : { security: dualTokenSecurity }),
+    security: dualTokenSecurity,
     ...(parameters.length > 0 ? { parameters } : {}),
     responses: {
       200: {
         description: 'OK',
         content: {
           'application/json': {
-            schema: { $ref: `#/components/schemas/${responseSchema}` },
+            schema: { $ref: `#/components/schemas/${successSchema}` },
           },
         },
       },
@@ -169,18 +185,6 @@ function buildOpenApi(title, serverUrl, operations) {
 }
 
 const appOperations = {
-  '/app/v3/api/system/health': {
-    get: operation('dezhou.health.check', ['health'], 'app-api', {
-      publicRoute: true,
-      responseSchema: 'DezhouHealthResponse',
-    }),
-  },
-  '/app/v3/api/system/ready': {
-    get: operation('dezhou.ready.check', ['health'], 'app-api', {
-      publicRoute: true,
-      responseSchema: 'DezhouHealthResponse',
-    }),
-  },
   '/app/v3/api/tables': {
     get: operation('dezhou.table.list', ['dezhou'], 'app-api', {
       parameters: [
@@ -193,6 +197,7 @@ const appOperations = {
   '/app/v3/api/tables/{tableId}': {
     get: operation('dezhou.table.retrieve', ['dezhou'], 'app-api', {
       parameters: [{ $ref: '#/components/parameters/TableIdPath' }],
+      responseSchema: 'DezhouTableResponse',
     }),
   },
 };

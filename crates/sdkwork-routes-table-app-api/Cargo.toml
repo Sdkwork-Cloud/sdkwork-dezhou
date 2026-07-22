@@ -12,6 +12,7 @@ path = "src/lib.rs"
 [dependencies]
 axum.workspace = true
 serde.workspace = true
-serde_json.workspace = true
 sdkwork_dezhou_table_service.workspace = true
+sdkwork-utils-rust.workspace = true
 sdkwork-web-axum.workspace = true
+sdkwork-web-core.workspace = true

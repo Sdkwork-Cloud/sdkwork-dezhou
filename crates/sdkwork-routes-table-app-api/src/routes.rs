@@ -1,12 +1,16 @@
 use axum::extract::{Path, Query, State};
-use axum::response::{IntoResponse, Response};
+use axum::response::Response;
 use axum::routing::get;
 use axum::Router;
-use sdkwork_dezhou_table_service::{DezhouTableQuery, DezhouTableRepository, DezhouTableService};
+use sdkwork_dezhou_table_service::{
+    DezhouError, DezhouTableQuery, DezhouTableRepository, DezhouTableService,
+};
+use sdkwork_utils_rust::validated_offset_list_params;
 use sdkwork_web_axum::RequirePrincipal;
+use sdkwork_web_core::WebRequestContext;
 use std::sync::Arc;
 
-use crate::error::{map_dezhou_error, ok_envelope};
+use crate::error::{map_dezhou_error, ok_envelope, ok_page_envelope};
 
 pub type DezhouTableStore<R> = Arc<DezhouTableService<R>>;
 
@@ -31,28 +35,27 @@ async fn list_tables<R>(
     RequirePrincipal(principal): RequirePrincipal,
     State(store): State<DezhouTableStore<R>>,
     Query(query): Query<DezhouListQuery>,
+    context: WebRequestContext,
 ) -> Response
 where
     R: DezhouTableRepository + Send + Sync,
 {
-    respond_list(store.as_ref(), principal.tenant_id(), query).await
+    respond_list(store.as_ref(), principal.tenant_id(), query, &context).await
 }
 
 async fn get_table<R>(
     RequirePrincipal(principal): RequirePrincipal,
     State(store): State<DezhouTableStore<R>>,
     Path(table_id): Path<String>,
+    context: WebRequestContext,
 ) -> Response
 where
     R: DezhouTableRepository + Send + Sync,
 {
     let tenant_id = principal.tenant_id();
     match store.get_table(tenant_id, &table_id).await {
-        Ok(item) => (axum::http::StatusCode::OK, ok_envelope(item)).into_response(),
-        Err(error) => {
-            let (status, problem) = map_dezhou_error(error);
-            (status, problem).into_response()
-        }
+        Ok(item) => ok_envelope(item, &context),
+        Err(error) => map_dezhou_error(error, &context),
     }
 }
 
@@ -60,21 +63,26 @@ pub async fn respond_list<R>(
     store: &DezhouTableService<R>,
     tenant_id: &str,
     query: DezhouListQuery,
+    context: &WebRequestContext,
 ) -> Response
 where
     R: DezhouTableRepository + Send + Sync,
 {
+    let page = match validated_offset_list_params(
+        query.page.map(i64::from),
+        query.page_size.map(i64::from),
+    ) {
+        Ok(page) => page,
+        Err(_) => return map_dezhou_error(DezhouError::invalid("invalid pagination"), context),
+    };
     let table_query = DezhouTableQuery {
-        page: query.page,
-        page_size: query.page_size,
+        page: Some(page.page as u32),
+        page_size: Some(page.page_size as u32),
         status: query.status,
     };
 
     match store.list_tables(tenant_id, table_query).await {
-        Ok(page) => (axum::http::StatusCode::OK, ok_envelope(page)).into_response(),
-        Err(error) => {
-            let (status, problem) = map_dezhou_error(error);
-            (status, problem).into_response()
-        }
+        Ok(page) => ok_page_envelope(page, context),
+        Err(error) => map_dezhou_error(error, context),
     }
 }

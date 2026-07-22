@@ -24,7 +24,7 @@
       "apiSurface": "app-api",
       "auth": { "mode": "dual-token", "required": true, "tenantScope": "tenant", "dataScope": "organization" },
       "handler": { "module": "crate", "name": "dezhou_table_list" },
-      "schemas": { "request": null, "response": "DezhouApiResult", "problem": "ProblemDetail" },
+      "schemas": { "request": null, "response": "DezhouTableListResponse", "problem": "ProblemDetail" },
       "ownership": { "owner": "sdkwork-dezhou", "apiAuthority": "sdkwork-dezhou-app-api" },
       "source": { "file": "apis/app-api/game/dezhou-app-api.openapi.json" }
     },
@@ -37,7 +37,7 @@
       "apiSurface": "app-api",
       "auth": { "mode": "dual-token", "required": true, "tenantScope": "tenant", "dataScope": "organization" },
       "handler": { "module": "crate", "name": "dezhou_table_retrieve" },
-      "schemas": { "request": null, "response": "DezhouApiResult", "problem": "ProblemDetail" },
+      "schemas": { "request": null, "response": "DezhouTableResponse", "problem": "ProblemDetail" },
       "ownership": { "owner": "sdkwork-dezhou", "apiAuthority": "sdkwork-dezhou-app-api" },
       "source": { "file": "apis/app-api/game/dezhou-app-api.openapi.json" }
     }

@@ -24,7 +24,7 @@
       "apiSurface": "backend-api",
       "auth": { "mode": "dual-token", "required": true, "tenantScope": "tenant", "dataScope": "organization" },
       "handler": { "module": "crate", "name": "backend_dezhou_table_list" },
-      "schemas": { "request": null, "response": "DezhouApiResult", "problem": "ProblemDetail" },
+      "schemas": { "request": null, "response": "DezhouTableListResponse", "problem": "ProblemDetail" },
       "ownership": { "owner": "sdkwork-dezhou", "apiAuthority": "sdkwork-dezhou-backend-api" },
       "source": { "file": "apis/backend-api/game/dezhou-backend-api.openapi.json" }
     }

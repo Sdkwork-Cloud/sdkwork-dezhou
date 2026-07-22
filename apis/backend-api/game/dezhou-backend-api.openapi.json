@@ -48,7 +48,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SdkWorkListResponse"
+                  "$ref": "#/components/schemas/DezhouTableListResponse"
                 }
               }
             }
@@ -140,15 +140,13 @@
         "properties": {
           "type": {
             "type": "string",
-            "format": "uri-reference"
+            "format": "uri"
           },
           "title": {
             "type": "string"
           },
           "status": {
-            "type": "integer",
-            "minimum": 100,
-            "maximum": 599
+            "type": "integer"
           },
           "detail": {
             "type": "string"
@@ -157,33 +155,35 @@
             "type": "string"
           },
           "code": {
-            "$ref": "#/components/schemas/SdkWorkPlatformErrorCode"
+            "type": "integer",
+            "format": "int32",
+            "minimum": 40001,
+            "maximum": 79999
           },
           "traceId": {
-            "type": "string",
-            "format": "uuid",
-            "description": "Server-owned request correlation id."
-          },
-          "errors": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FieldError"
-            }
+            "type": "string"
           }
         }
       },
-      "DezhouHealthResponse": {
+      "SdkWorkApiResponse": {
         "type": "object",
         "additionalProperties": false,
         "required": [
-          "status",
-          "service"
+          "code",
+          "data",
+          "traceId"
         ],
         "properties": {
-          "status": {
-            "type": "string"
+          "code": {
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              0
+            ],
+            "default": 0
           },
-          "service": {
+          "data": {},
+          "traceId": {
             "type": "string"
           }
         }
@@ -221,130 +221,21 @@
           }
         }
       },
-      "DezhouTablePage": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "items",
-          "total",
-          "page",
-          "pageSize"
-        ],
-        "properties": {
-          "items": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DezhouTableItem"
-            }
-          },
-          "total": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "page": {
-            "type": "integer",
-            "minimum": 1
-          },
-          "pageSize": {
-            "type": "integer",
-            "minimum": 1
-          }
-        }
-      },
-      "SdkWorkApiResponse": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "code",
-          "data",
-          "traceId"
-        ],
-        "properties": {
-          "code": {
-            "type": "integer",
-            "format": "int32",
-            "enum": [
-              0
-            ],
-            "default": 0,
-            "minimum": 0,
-            "maximum": 0
-          },
-          "data": {
-            "description": "Operation-specific payload typed per response schema."
-          },
-          "traceId": {
-            "type": "string",
-            "format": "uuid",
-            "description": "Server-owned request correlation id."
-          }
-        }
-      },
-      "SdkWorkResourceData": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "item"
-        ],
-        "properties": {
-          "item": {
-            "type": "object",
-            "additionalProperties": true,
-            "description": "Typed domain resource for the operation."
-          }
-        }
-      },
-      "SdkWorkPageData": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "items",
-          "pageInfo"
-        ],
-        "properties": {
-          "items": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "additionalProperties": true
-            }
-          },
-          "pageInfo": {
-            "$ref": "#/components/schemas/PageInfo"
-          }
-        }
-      },
-      "SdkWorkCommandData": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "accepted"
-        ],
-        "properties": {
-          "accepted": {
-            "type": "boolean",
-            "const": true
-          },
-          "resourceId": {
-            "type": "string"
-          },
-          "status": {
-            "type": "string"
-          }
-        }
-      },
       "PageInfo": {
         "type": "object",
         "additionalProperties": false,
         "required": [
-          "mode"
+          "mode",
+          "page",
+          "pageSize",
+          "totalItems",
+          "totalPages"
         ],
         "properties": {
           "mode": {
             "type": "string",
             "enum": [
-              "offset",
-              "cursor"
+              "offset"
             ]
           },
           "page": {
@@ -353,8 +244,7 @@
           },
           "pageSize": {
             "type": "integer",
-            "minimum": 1,
-            "maximum": 200
+            "minimum": 1
           },
           "totalItems": {
             "type": "string",
@@ -364,47 +254,12 @@
             "type": "integer",
             "minimum": 0
           },
-          "nextCursor": {
-            "type": [
-              "string",
-              "null"
-            ]
-          },
           "hasMore": {
             "type": "boolean"
           }
         }
       },
-      "SdkWorkPlatformErrorCode": {
-        "type": "integer",
-        "format": "int32",
-        "minimum": 40001,
-        "maximum": 79999,
-        "description": "Platform or domain error code per API_SPEC.md §15.3."
-      },
-      "FieldError": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "field",
-          "message"
-        ],
-        "properties": {
-          "field": {
-            "type": "string"
-          },
-          "message": {
-            "type": "string"
-          },
-          "code": {
-            "type": "integer",
-            "format": "int32",
-            "minimum": 40011,
-            "maximum": 40099
-          }
-        }
-      },
-      "SdkWorkResourceResponse": {
+      "DezhouTableResponse": {
         "allOf": [
           {
             "$ref": "#/components/schemas/SdkWorkApiResponse"
@@ -416,13 +271,22 @@
             ],
             "properties": {
               "data": {
-                "$ref": "#/components/schemas/SdkWorkResourceData"
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "item"
+                ],
+                "properties": {
+                  "item": {
+                    "$ref": "#/components/schemas/DezhouTableItem"
+                  }
+                }
               }
             }
           }
         ]
       },
-      "SdkWorkListResponse": {
+      "DezhouTableListResponse": {
         "allOf": [
           {
             "$ref": "#/components/schemas/SdkWorkApiResponse"
@@ -434,25 +298,23 @@
             ],
             "properties": {
               "data": {
-                "$ref": "#/components/schemas/SdkWorkPageData"
-              }
-            }
-          }
-        ]
-      },
-      "SdkWorkCommandResponse": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/SdkWorkApiResponse"
-          },
-          {
-            "type": "object",
-            "required": [
-              "data"
-            ],
-            "properties": {
-              "data": {
-                "$ref": "#/components/schemas/SdkWorkCommandData"
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "items",
+                  "pageInfo"
+                ],
+                "properties": {
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/DezhouTableItem"
+                    }
+                  },
+                  "pageInfo": {
+                    "$ref": "#/components/schemas/PageInfo"
+                  }
+                }
               }
             }
           }

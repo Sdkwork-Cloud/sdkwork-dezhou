@@ -6,10 +6,7 @@ use sdkwork_web_core::HttpRouteManifest;
 use crate::route_manifest::{DEZHOU_APP_HTTP_ROUTES, DEZHOU_BACKEND_HTTP_ROUTES};
 
 pub fn dezhou_public_path_prefixes() -> Vec<String> {
-    vec![
-        "/app/v3/api/system/health".to_owned(),
-        "/app/v3/api/system/ready".to_owned(),
-    ]
+    Vec::new()
 }
 
 fn wrap_router_with_manifest(router: Router, route_manifest: HttpRouteManifest) -> Router {

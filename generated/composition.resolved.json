@@ -11,7 +11,7 @@
       "runtimeMode": "same-origin-embedded",
       "mountStatus": null,
       "envKey": "VITE_SDKWORK_DEZHOU_APP_API_BASE_URL",
-      "forbidProductSameOriginFallback": false,
+      "forbidApplicationSameOriginFallback": false,
       "corePackage": "sdkwork-dezhou-pc-core",
       "source": "apps/sdkwork-dezhou-pc/packages/sdkwork-dezhou-pc-core/specs/component.spec.json"
     },
@@ -20,10 +20,10 @@
       "surface": "app-api",
       "apiPrefix": "/app/v3/api",
       "connectivityPlane": "platform",
-      "runtimeMode": "external-via-platform-gateway",
+      "runtimeMode": "external-via-platform-surface",
       "mountStatus": null,
       "envKey": "VITE_SDKWORK_APPBASE_APP_API_BASE_URL",
-      "forbidProductSameOriginFallback": false,
+      "forbidApplicationSameOriginFallback": false,
       "corePackage": "sdkwork-dezhou-pc-core",
       "source": "apps/sdkwork-dezhou-pc/packages/sdkwork-dezhou-pc-core/specs/component.spec.json"
     }
@@ -114,6 +114,98 @@
         "dependencyApiSurfaces": []
       },
       {
+        "name": "sdkwork-api-dezhou-assembly",
+        "type": "rust-api-assembly",
+        "root": "crates/sdkwork-api-dezhou-assembly",
+        "domain": "application",
+        "capability": "api-assembly",
+        "surface": "api-assembly",
+        "languages": [
+          "rust"
+        ],
+        "source": "crates/sdkwork-api-dezhou-assembly/specs/component.spec.json",
+        "layerRole": "runtime-composition",
+        "publicExports": [
+          "."
+        ],
+        "providedPorts": [],
+        "requiredPorts": [],
+        "sdkDependencies": [],
+        "routeManifest": "assembly-manifest.json",
+        "runtimeEntrypoints": [],
+        "dependencyApiSurfaces": []
+      },
+      {
+        "name": "sdkwork-dezhou-service-host",
+        "type": "rust-crate",
+        "root": null,
+        "domain": "game",
+        "capability": "table-service-host",
+        "surface": "service-host",
+        "languages": [
+          "rust"
+        ],
+        "source": "crates/sdkwork-dezhou-service-host/specs/component.spec.json",
+        "layerRole": null,
+        "publicExports": [
+          "."
+        ],
+        "providedPorts": [],
+        "requiredPorts": [],
+        "sdkDependencies": [],
+        "routeManifest": null,
+        "runtimeEntrypoints": [],
+        "dependencyApiSurfaces": []
+      },
+      {
+        "name": "sdkwork-routes-table-app-api",
+        "type": "rust-route-crate",
+        "root": "crates/sdkwork-routes-table-app-api",
+        "domain": "game",
+        "capability": "table",
+        "surface": "app-api",
+        "languages": [
+          "rust"
+        ],
+        "source": "crates/sdkwork-routes-table-app-api/specs/component.spec.json",
+        "layerRole": "backend-route",
+        "publicExports": [
+          "."
+        ],
+        "providedPorts": [],
+        "requiredPorts": [],
+        "sdkDependencies": [],
+        "routeManifest": "sdks/_route-manifests/app-api/sdkwork-routes-table-app-api.route-manifest.json",
+        "runtimeEntrypoints": [
+          "build_table_app_router"
+        ],
+        "dependencyApiSurfaces": []
+      },
+      {
+        "name": "sdkwork-routes-table-backend-api",
+        "type": "rust-route-crate",
+        "root": "crates/sdkwork-routes-table-backend-api",
+        "domain": "game",
+        "capability": "table",
+        "surface": "backend-api",
+        "languages": [
+          "rust"
+        ],
+        "source": "crates/sdkwork-routes-table-backend-api/specs/component.spec.json",
+        "layerRole": "backend-route",
+        "publicExports": [
+          "."
+        ],
+        "providedPorts": [],
+        "requiredPorts": [],
+        "sdkDependencies": [],
+        "routeManifest": "sdks/_route-manifests/backend-api/sdkwork-routes-table-backend-api.route-manifest.json",
+        "runtimeEntrypoints": [
+          "build_table_backend_router"
+        ],
+        "dependencyApiSurfaces": []
+      },
+      {
         "name": "sdkwork-dezhou-workspace",
         "type": "rust-crate",
         "root": "sdkwork-dezhou",
@@ -189,47 +281,106 @@
     "rust": {
       "crates": [
         {
-          "packageName": "sdkwork-dezhou-database-host",
-          "manifest": "crates/sdkwork-dezhou-database-host/Cargo.toml",
-          "dependencies": []
+          "packageName": "sdkwork-api-dezhou-assembly",
+          "manifest": "crates/sdkwork-api-dezhou-assembly/Cargo.toml",
+          "dependencies": [
+            "axum",
+            "tokio",
+            "sdkwork-dezhou-service-host",
+            "sdkwork-web-core",
+            "sdkwork-web-axum",
+            "sdkwork-web-contract",
+            "sdkwork-iam-web-adapter",
+            "sdkwork-routes-table-app-api",
+            "sdkwork-routes-table-backend-api",
+            "serde",
+            "serde-json"
+          ]
         },
         {
-          "packageName": "sdkwork-dezhou-standalone-gateway",
-          "manifest": "crates/sdkwork-dezhou-standalone-gateway/Cargo.toml",
+          "packageName": "sdkwork-api-dezhou-standalone-gateway",
+          "manifest": "crates/sdkwork-api-dezhou-standalone-gateway/Cargo.toml",
           "dependencies": [
-            "serde",
-            "serde-json",
-            "name",
-            "path",
+            "axum",
+            "sdkwork-api-dezhou-assembly",
+            "sdkwork-web-bootstrap",
+            "tokio",
+            "tower-http",
+            "tracing",
+            "tracing-subscriber",
             "http-body-util",
+            "sdkwork-dezhou-table-repository-sqlx",
+            "sdkwork-dezhou-table-service",
+            "sdkwork-routes-table-app-api",
+            "sdkwork-web-core",
+            "tokio",
             "tower"
+          ]
+        },
+        {
+          "packageName": "sdkwork-dezhou-database-host",
+          "manifest": "crates/sdkwork-dezhou-database-host/Cargo.toml",
+          "dependencies": [
+            "dotenvy",
+            "sdkwork-database-config",
+            "sdkwork-database-lifecycle",
+            "sdkwork-database-spi",
+            "sdkwork-database-sqlx"
+          ]
+        },
+        {
+          "packageName": "sdkwork-dezhou-service-host",
+          "manifest": "crates/sdkwork-dezhou-service-host/Cargo.toml",
+          "dependencies": [
+            "sdkwork-dezhou-database-host",
+            "sdkwork-dezhou-table-repository-sqlx",
+            "sdkwork-dezhou-table-service"
           ]
         },
         {
           "packageName": "sdkwork-dezhou-table-repository-sqlx",
           "manifest": "crates/sdkwork-dezhou-table-repository-sqlx/Cargo.toml",
-          "dependencies": []
+          "dependencies": [
+            "async-trait",
+            "sdkwork-dezhou-table-service",
+            "sdkwork-database-sqlx",
+            "sdkwork-utils-rust",
+            "sqlx",
+            "tokio"
+          ]
         },
         {
           "packageName": "sdkwork-dezhou-table-service",
           "manifest": "crates/sdkwork-dezhou-table-service/Cargo.toml",
-          "dependencies": []
-        },
-        {
-          "packageName": "sdkwork-routes-health-app-api",
-          "manifest": "crates/sdkwork-routes-health-app-api/Cargo.toml",
-          "dependencies": []
+          "dependencies": [
+            "async-trait",
+            "sdkwork-utils-rust",
+            "serde",
+            "tokio"
+          ]
         },
         {
           "packageName": "sdkwork-routes-table-app-api",
           "manifest": "crates/sdkwork-routes-table-app-api/Cargo.toml",
-          "dependencies": []
+          "dependencies": [
+            "axum",
+            "serde",
+            "sdkwork-dezhou-table-service",
+            "sdkwork-utils-rust",
+            "sdkwork-web-axum",
+            "sdkwork-web-core"
+          ]
         },
         {
           "packageName": "sdkwork-routes-table-backend-api",
           "manifest": "crates/sdkwork-routes-table-backend-api/Cargo.toml",
           "dependencies": [
-            "sdkwork-routes-table-app-api"
+            "axum",
+            "serde",
+            "sdkwork-dezhou-table-service",
+            "sdkwork-routes-table-app-api",
+            "sdkwork-web-axum",
+            "sdkwork-web-core"
           ]
         }
       ]
@@ -237,19 +388,13 @@
     "routes": {
       "manifests": [
         {
-          "source": "sdks/_route-manifests/app-api/sdkwork-router-health-app-api.route-manifest.json",
-          "packageName": "sdkwork-routes-health-app-api",
-          "surface": "app-api",
-          "routeCount": 2
-        },
-        {
-          "source": "sdks/_route-manifests/app-api/sdkwork-router-table-app-api.route-manifest.json",
+          "source": "sdks/_route-manifests/app-api/sdkwork-routes-table-app-api.route-manifest.json",
           "packageName": "sdkwork-routes-table-app-api",
           "surface": "app-api",
           "routeCount": 2
         },
         {
-          "source": "sdks/_route-manifests/backend-api/sdkwork-router-table-backend-api.route-manifest.json",
+          "source": "sdks/_route-manifests/backend-api/sdkwork-routes-table-backend-api.route-manifest.json",
           "packageName": "sdkwork-routes-table-backend-api",
           "surface": "backend-api",
           "routeCount": 1
@@ -261,7 +406,7 @@
     }
   },
   "env": {},
-  "requiresPlatformGatewayProcess": true,
+  "requiresPlatformApiSurface": true,
   "issues": [],
   "meta": {
     "resolver": "sdkwork-specs/tools/lib/composition-resolver.mjs",

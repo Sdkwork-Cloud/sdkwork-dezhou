@@ -11,14 +11,16 @@ pub struct ApiAssembly {
     pub router: Router,
 }
 
-pub async fn assemble_business_routes() -> Result<ApiAssembly, String> {
+pub async fn assemble_api_router() -> Result<ApiAssembly, String> {
     let service = build_table_service().await?;
     Ok(assemble_api_router_with_service(service))
 }
 
-pub fn assemble_api_router_with_service(
-    service: SharedTableService,
-) -> ApiAssembly {
+pub async fn assemble_business_routes() -> Result<ApiAssembly, String> {
+    assemble_api_router().await
+}
+
+pub fn assemble_api_router_with_service(service: SharedTableService) -> ApiAssembly {
     let app = with_dezhou_app_request_context(build_table_app_router(service.clone()));
     let backend = with_dezhou_backend_request_context(build_table_backend_router(service));
     ApiAssembly {

@@ -20,7 +20,7 @@
                     "api:check":  "node tools/dezhou_route_manifest_check.mjs \u0026\u0026 node tools/dezhou_sdk_generate.mjs --check",
                     "sdk:check":  "node tools/dezhou_sdk_generate.mjs --check",
                     "sdk:generate":  "node tools/dezhou_sdk_generate.mjs",
-                    "sdk:build":  "pnpm --filter @sdkwork/dezhou-app-sdk build \u0026\u0026 pnpm --filter @sdkwork/dezhou-backend-sdk build",
+                    "sdk:build":  "pnpm --dir sdks/sdkwork-dezhou-app-sdk/sdkwork-dezhou-app-sdk-typescript/generated/server-openapi build \u0026\u0026 pnpm --dir sdks/sdkwork-dezhou-backend-sdk/sdkwork-dezhou-backend-sdk-typescript/generated/server-openapi build",
                     "check:agent-workflow-standard":  "node ../sdkwork-specs/tools/check-agent-workflow-standard.mjs --root .",
                     "db:materialize:contract":  "node ../sdkwork-specs/tools/materialize-database-contract-from-baseline.mjs --root . --baseline database/ddl/baseline/postgres/0001_dezhou_baseline.sql --module-id dezhou --owner dezhou-platform --prefixes dezhou_ --engines postgres",
                     "db:validate":  "node ../sdkwork-specs/tools/check-database-framework-standard.mjs --root .",

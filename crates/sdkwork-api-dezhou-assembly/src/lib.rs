@@ -11,7 +11,7 @@ pub mod route_manifest {
 }
 
 pub use bootstrap::{
-    assemble_api_router_with_service, assemble_business_routes, ApiAssembly,
+    assemble_api_router, assemble_api_router_with_service, assemble_business_routes, ApiAssembly,
 };
 pub use sdkwork_dezhou_service_host::{build_table_service, SharedTableService};
 pub use web_bootstrap::{

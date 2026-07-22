@@ -243,6 +243,6 @@ impl TableRow {
     }
 }
 
-fn map_sqlx_error(error: sqlx::Error) -> DezhouError {
-    DezhouError::invalid(error.to_string())
+fn map_sqlx_error(_error: sqlx::Error) -> DezhouError {
+    DezhouError::internal("table repository operation failed")
 }

@@ -19,7 +19,6 @@ const API_INPUTS = {
 };
 
 const ROUTE_MANIFESTS = [
-  'sdks/_route-manifests/app-api/sdkwork-routes-health-app-api.route-manifest.json',
   'sdks/_route-manifests/app-api/sdkwork-routes-table-app-api.route-manifest.json',
   'sdks/_route-manifests/backend-api/sdkwork-routes-table-backend-api.route-manifest.json',
 ];

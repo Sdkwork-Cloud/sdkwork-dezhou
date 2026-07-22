@@ -61,6 +61,13 @@ impl DezhouError {
         }
     }
 
+    pub fn internal(message: impl Into<String>) -> Self {
+        Self {
+            code: "internal".into(),
+            message: message.into(),
+        }
+    }
+
     pub fn code(&self) -> &str {
         &self.code
     }
