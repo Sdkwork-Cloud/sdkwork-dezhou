@@ -1,23 +1,30 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "kind": "sdkwork.database.module",
   "moduleId": "dezhou",
   "serviceCode": "DEZHOU",
   "displayName": "DEZHOU Database",
   "owner": "dezhou-platform",
-  "engines": ["postgres"],
+  "engines": [
+    "postgres"
+  ],
   "defaultEngine": "postgres",
   "tablePrefix": "dezhou_",
   "contractVersion": "1.0.0",
   "baselineStrategy": "baseline-plus-migrations",
   "modules": [],
   "lifecycle": {
-    "autoMigrate": true,
+    "autoMigrate": false,
     "seedOnBoot": false,
     "defaultSeedLocale": "zh-CN",
     "defaultSeedProfile": "standard",
-    "supportedSeedLocales": ["zh-CN", "en-US"],
-    "activeSeedLocales": ["zh-CN"],
+    "supportedSeedLocales": [
+      "zh-CN",
+      "en-US"
+    ],
+    "activeSeedLocales": [
+      "zh-CN"
+    ],
     "driftCheckIntervalSec": 60
   },
   "paths": {
@@ -26,5 +33,9 @@
     "seeds": "seeds",
     "driftPolicy": "drift/policy.yaml"
   },
-  "spi": { "provider": "default", "hooks": [] }
+  "spi": {
+    "provider": "default",
+    "hooks": []
+  },
+  "databaseRole": "authoritative-server"
 }

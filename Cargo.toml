@@ -2,7 +2,6 @@
 resolver = "2"
 members = [
     "crates/sdkwork-api-dezhou-assembly",
-    "crates/sdkwork-api-dezhou-assembly",
     "crates/sdkwork-api-dezhou-standalone-gateway",
     "crates/sdkwork-dezhou-service-host",
     "crates/sdkwork-dezhou-database-host",

@@ -12,11 +12,11 @@
   },
   "contracts": {
     "publicExports": ["."],
-    "runtimeEntrypoints": [],
+    "runtimeEntrypoints": ["DezhouServiceHost::from_env", "DezhouServiceHost::from_pool"],
     "sdkDependencies": [],
     "dependencyApiExports": [],
     "dependencyApiSurfaces": [],
     "events": [],
-    "configKeys": ["DEZHOU_REPOSITORY_MODE"]
+    "configKeys": []
   }
 }
