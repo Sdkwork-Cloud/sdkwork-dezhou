@@ -41,3 +41,9 @@ Thumbs.db
 *.tsbuildinfo
 **/.cache/
 
+
+# SDKWork local-only and generated artifacts
+*.log
+.DS_Store
+Thumbs.db
+**/build/
