@@ -6,9 +6,19 @@ services:
     ports:
       - "8096:8096"
     environment:
-      SDKWORK_DATABASE_URL: postgres://sdkwork_ai_prod:sdkwork@postgres:5432/sdkwork_ai_prod
+      SDKWORK_DATABASE_ENGINE: postgresql
+      SDKWORK_DATABASE_HOST: postgres
+      SDKWORK_DATABASE_PORT: "5432"
+      SDKWORK_DATABASE_NAME: sdkwork_ai_prod
+      SDKWORK_DATABASE_SCHEMA: sdkwork_ai_prod
+      SDKWORK_DATABASE_USERNAME: sdkwork_ai_prod
+      SDKWORK_DATABASE_PASSWORD_FILE: /etc/sdkwork/database/database.secret
+      SDKWORK_DATABASE_SSL_MODE: require
       DEZHOU_REPOSITORY_MODE: sqlx
       SDKWORK_DEZHOU_APP_ROOT: /app
+    volumes:
+      # Workspace database secret (§7.3); operator must provision the file.
+      - /etc/sdkwork/database/database.secret:/etc/sdkwork/database/database.secret:ro
     depends_on:
       - postgres
 
@@ -16,7 +26,7 @@ services:
     image: postgres:16
     environment:
       POSTGRES_USER: sdkwork_ai_prod
-      POSTGRES_PASSWORD: sdkwork
+      POSTGRES_PASSWORD: change-me   # placeholder; real secret lives at /etc/sdkwork/database/database.secret
       POSTGRES_DB: sdkwork_ai_prod
     ports:
       - "5433:5432"

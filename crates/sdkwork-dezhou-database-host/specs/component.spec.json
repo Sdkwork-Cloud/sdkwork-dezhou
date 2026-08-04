@@ -25,7 +25,7 @@
     "dependencyApiExports": [],
     "dependencyApiSurfaces": [],
     "events": [],
-    "configKeys": ["DEZHOU_DATABASE_URL", "SDKWORK_DEZHOU_APP_ROOT"]
+    "configKeys": ["SDKWORK_DATABASE_*", "SDKWORK_DEZHOU_APP_ROOT"]
   },
   "verification": {
     "commands": ["cargo check -p sdkwork-dezhou-database-host"]

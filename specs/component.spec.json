@@ -54,7 +54,7 @@
     "routeManifest": "sdks/_route-manifests/app-api/sdkwork-routes-table-app-api.route-manifest.json",
     "sdkClients": ["sdkwork-dezhou-app-sdk", "sdkwork-dezhou-backend-sdk"],
     "events": [],
-    "configKeys": ["DEZHOU_DATABASE_URL", "SDKWORK_DEZHOU_APP_ROOT"]
+    "configKeys": ["SDKWORK_DATABASE_*", "SDKWORK_DEZHOU_APP_ROOT"]
   },
   "verification": {
     "commands": ["pnpm verify"]
