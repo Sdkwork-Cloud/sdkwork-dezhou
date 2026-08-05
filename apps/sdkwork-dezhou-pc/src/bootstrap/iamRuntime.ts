@@ -7,7 +7,7 @@ import {
 import type { IamAppContext, IamDeploymentMode, IamEnvironment } from '@sdkwork/iam-contracts';
 import type { IamRuntime } from '@sdkwork/iam-runtime';
 import { normalizeSdkworkApiBaseUrl } from '@sdkwork/runtime-bootstrap';
-import { createClient as createDezhouAppClient } from '@sdkwork-internal/dezhou-app-sdk-generated';
+import { createClient as createDezhouAppClient } from '@sdkwork/dezhou-app-sdk';
 
 import type { SdkworkDezhouPcRuntimeConfig } from './environment';
 import {

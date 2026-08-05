@@ -18,7 +18,6 @@ export default defineConfig(({ mode }) => {
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),
-        '@sdkwork-internal/dezhou-app-sdk-generated': path.resolve(dezhouAppSdkRoot, 'src/index.ts'),
       },
     },
     server: {

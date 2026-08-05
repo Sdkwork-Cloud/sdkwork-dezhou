@@ -1,5 +1,5 @@
-import type { DezhouTableItem } from '@sdkwork-internal/dezhou-app-sdk-generated';
-import type { SdkworkDezhouAppClient } from '@sdkwork-internal/dezhou-app-sdk-generated';
+import type { DezhouTableItem } from '@sdkwork/dezhou-app-sdk';
+import type { SdkworkDezhouAppClient } from '@sdkwork/dezhou-app-sdk';
 
 export type { DezhouTableItem };
 
